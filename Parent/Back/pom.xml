@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.test.parent</groupId>
+		<artifactId>Parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.test.parent</groupId>
+	<artifactId>Back</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Back</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+
+
+	</properties>
+
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<url>http://www.4each.site:8081/artifactory/plugins-releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshots</id>
+			<url>http://www.4each.site:8081/artifactory/plugins-snapshot-local</url>
+			<!-- <url>http://www.4each.site:8081/artifactory/plugins-snapshots</url> -->
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>4each.site</id>
+			<name>4each.site-snapshots</name>
+			<url>http://www.4each.site:8081/artifactory/plugins-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.test.plugin</groupId>
+				<artifactId>MyPlugin</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<executions>
+					<execution>
+
+						<phase>clean</phase>
+
+						<goals>
+							<goal>julaiCheck</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<parentBaseDir>${project.parent.basedir}/</parentBaseDir>
+					<param1>${maven.home}/</param1>
+
+				</configuration>
+			</plugin>
+
+
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${build.directory}/classes/static/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.parent.basedir}/WWW</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
